@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whatsapp_clone/features/app/helpers/extensions.dart';
 import 'package:whatsapp_clone/features/app/routing/routes.dart';
 import 'package:whatsapp_clone/features/app/theme/style.dart';
+import 'package:whatsapp_clone/features/user/presentation/widgets/btn_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -108,29 +109,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                context.pushNamed(Routes.otpScreen);
-              },
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                width: 120,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: tabColor,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: const Center(
-                  child: Text(
-                    "Next",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-            ),
+            btnWidget(
+                textButton: "Next",
+                onTap: () {
+                  context.pushNamed(Routes.otpScreen);
+                },
+                width: 120.w,
+                height: 40.h)
           ],
         ),
       ),
