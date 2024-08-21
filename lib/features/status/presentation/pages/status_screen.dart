@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whatsapp_clone/features/app/global/date/date_formats.dart';
 import 'package:whatsapp_clone/features/app/global/widgets/profile_widget.dart';
+import 'package:whatsapp_clone/features/app/helpers/extensions.dart';
+import 'package:whatsapp_clone/features/app/routing/routes.dart';
 import 'package:whatsapp_clone/features/app/theme/style.dart';
 
 class StatusScreen extends StatelessWidget {
@@ -57,7 +59,14 @@ class StatusScreen extends StatelessWidget {
                     const Text("Tap to add status update",
                         style: TextStyle(color: greyColor))
                   ],
-                ))
+                )),
+                GestureDetector(
+                    onTap: () {
+                      context.pushNamed(Routes.myStatusScreen);
+                    },
+                    child: Icon(Icons.more_horiz,
+                        color: greyColor.withOpacity(0.5))),
+                SizedBox(width: 10.w)
               ],
             ),
             SizedBox(height: 10.h),
@@ -76,17 +85,20 @@ class StatusScreen extends StatelessWidget {
                 physics: const ScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ListTile(
-                      leading: Container(
-                    margin: const EdgeInsets.all(3),
-                    width: 55.w,
-                    height: 55.h,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(25.r),
-                      child: profileWidget(),
+                    leading: Container(
+                      margin: const EdgeInsets.all(3),
+                      width: 45.w,
+                      height: 55.h,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(25.r),
+                        child: profileWidget(),
+                      ),
                     ),
-                  ),
-                title: Text("UserName",style:TextStyle(fontSize: 16.sp)),
-                subtitle:  Text(formatDateTime(DateTime.now()),style:const TextStyle(color: greyColor),),
+                    title: Text("UserName", style: TextStyle(fontSize: 16.sp)),
+                    subtitle: Text(
+                      formatDateTime(DateTime.now()),
+                      style: const TextStyle(color: greyColor),
+                    ),
                   );
                 })
           ],

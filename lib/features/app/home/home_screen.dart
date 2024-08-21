@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen>
         actions: [
           Row(
             children: [
-               Icon(
+              Icon(
                 Icons.camera_alt_outlined,
                 color: greyColor,
                 size: 28.sp,
@@ -57,12 +57,12 @@ class _HomeScreenState extends State<HomeScreen>
               SizedBox(
                 width: 25.w,
               ),
-               Icon(Icons.search, color: greyColor, size: 28.sp),
+              Icon(Icons.search, color: greyColor, size: 28.sp),
               SizedBox(
                 width: 10.w,
               ),
               PopupMenuButton<String>(
-                icon:  Icon(
+                icon: Icon(
                   Icons.more_vert,
                   color: greyColor,
                   size: 28.sp,
@@ -153,6 +153,7 @@ class _HomeScreenState extends State<HomeScreen>
           onPressed: () {
             // Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactsPage()));
             // Navigator.pushNamed(context, PageConst.contactUsersPage, arguments: widget.uid);
+            context.pushNamed(Routes.callContactScreen);
           },
           child: const Icon(
             Icons.add_call,
