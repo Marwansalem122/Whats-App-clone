@@ -24,7 +24,7 @@ class _InitialProfileSubmitScreenState
   final TextEditingController _usernameController = TextEditingController();
   File? _image;
 
-  bool _isProfileUpdating = false;
+  final bool _isProfileUpdating = false;
 
   Future selectImage() async {
     try {

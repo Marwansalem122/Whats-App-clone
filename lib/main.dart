@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whatsapp_clone/features/app/routing/app_router.dart';
 import 'package:whatsapp_clone/features/app/routing/routes.dart';
 import 'package:whatsapp_clone/features/app/theme/style.dart';
+import 'main_injection_container.dart'as di;
 
-void main() {
+void main() async {
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -26,9 +28,8 @@ class MyApp extends StatelessWidget {
                   appBarTheme: const AppBarTheme(
                     color: appBarColor,
                   )),
-               onGenerateRoute: AppRouter().generateRoute,
+              onGenerateRoute: AppRouter().generateRoute,
               initialRoute: Routes.splashScreen,
-              
             ));
   }
 }
