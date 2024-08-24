@@ -8,7 +8,8 @@ import 'package:whatsapp_clone/features/chat/presentation/pages/chat_screen.dart
 import 'package:whatsapp_clone/features/status/presentation/pages/status_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final String uid;
+  const HomeScreen({super.key, required this.uid});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -75,9 +76,7 @@ class _HomeScreenState extends State<HomeScreen>
                     value: "Settings",
                     child: GestureDetector(
                         onTap: () {
-                          // Navigator.pushNamed(
-                          //     context, PageConst.settingsPage, arguments: widget.uid);
-                          context.pushNamed(Routes.settingsScreen);
+                          context.pushNamed(Routes.settingsScreen,arguments:  widget.uid);
                         },
                         child: const Text('Settings')),
                   ),

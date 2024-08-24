@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:whatsapp_clone/features/app/const/app_const.dart';
@@ -10,9 +11,13 @@ import 'package:whatsapp_clone/features/app/routing/routes.dart';
 import 'package:whatsapp_clone/features/app/theme/style.dart';
 import 'package:whatsapp_clone/features/user/presentation/widgets/btn_widget.dart';
 
+import '../../../../storage/storage_provider.dart';
+import '../../domain/entities/user_entity.dart';
+import '../cubit/credential/credential_cubit.dart';
+
 class InitialProfileSubmitScreen extends StatefulWidget {
-  // final String phoneNumber;
-  const InitialProfileSubmitScreen({super.key});
+   final String phoneNumber;
+  const InitialProfileSubmitScreen({super.key,  required this.phoneNumber});
 
   @override
   State<InitialProfileSubmitScreen> createState() =>
@@ -24,7 +29,7 @@ class _InitialProfileSubmitScreenState
   final TextEditingController _usernameController = TextEditingController();
   File? _image;
 
-  final bool _isProfileUpdating = false;
+   bool _isProfileUpdating = false;
 
   Future selectImage() async {
     try {
@@ -111,16 +116,42 @@ class _InitialProfileSubmitScreenState
             ),
             btnWidget(
                 textButton: "Next",
-                onTap: () {
-                  context.pushNamedAndRemoveUntil(Routes.homeScreen);
-                },
+                onTap: submitProfileInfo,
                 width: 150.w,
                 height: 40.h)
           ])),
     );
   }
-
-  // void submitProfileInfo() {
-
-  // }
+  void submitProfileInfo() {
+    if(_image != null) {
+      StorageProviderRemoteDataSource.uploadProfileImage(
+          file: _image!,
+          onComplete: (onProfileUpdateComplete) {
+            setState(() {
+              _isProfileUpdating = onProfileUpdateComplete;
+            });
+          }
+      ).then((profileImageUrl) {
+        _profileInfo(
+            profileUrl: profileImageUrl
+        );
+      });
+    } else {
+      _profileInfo(profileUrl: "");
+    }
+  }
+  void _profileInfo({String? profileUrl}) {
+    if (_usernameController.text.isNotEmpty) {
+      BlocProvider.of<CredentialCubit>(context).submitProfileInfo(
+          user: UserEntity(
+            email: "",
+            username: _usernameController.text,
+            phoneNumber: widget.phoneNumber,
+            status: "Hey There! I'm using WhatsApp Clone",
+            isOnline: false,
+            profileUrl: profileUrl,
+          )
+      );
+    }
+  }
 }

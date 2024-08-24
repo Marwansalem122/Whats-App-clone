@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:whatsapp_clone/features/app/home/contacts_screen.dart';
 import 'package:whatsapp_clone/features/app/home/home_screen.dart';
 import 'package:whatsapp_clone/features/app/routing/routes.dart';
 import 'package:whatsapp_clone/features/app/settings/settings_screen.dart';
 import 'package:whatsapp_clone/features/app/splash/splash_screen.dart';
+import 'package:whatsapp_clone/features/app/welcome/welcome_screen.dart';
 import 'package:whatsapp_clone/features/call/presentation/pages/call_contact_screen.dart';
 import 'package:whatsapp_clone/features/chat/presentation/pages/single_chat_screen.dart';
 import 'package:whatsapp_clone/features/status/presentation/pages/my_status_screen.dart';
+import 'package:whatsapp_clone/features/user/domain/entities/user_entity.dart';
+import 'package:whatsapp_clone/features/user/presentation/pages/edit_profile_sreen.dart';
 import 'package:whatsapp_clone/features/user/presentation/pages/initial_profile_submit_screen.dart';
 import 'package:whatsapp_clone/features/user/presentation/pages/login_screen.dart';
 import 'package:whatsapp_clone/features/user/presentation/pages/otp_screen.dart';
+
+import '../../user/presentation/cubit/auth/auth_cubit.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
@@ -17,38 +23,87 @@ class AppRouter {
     final argument = settings.arguments;
 
     switch (settings.name) {
-      case Routes.splashScreen:
-        return materialPageBuilder(const SplashScreen());
+      case Routes.intialScreen:
+      case Routes.intialScreen:
+        return materialPageBuilder(BlocBuilder<AuthCubit, AuthState>(
+          builder: (context, authState) {
+            if (authState is Authenticated) {
+              return HomeScreen(uid: authState.uid);
+            }
+            return const SplashScreen();
+          },
+        ));
       case Routes.loginScreen:
         return materialPageBuilder(const LoginScreen());
+      case Routes.welcomeScreen:
+        return materialPageBuilder(const WelcomeScreen());
+      case Routes.splashScreen:
+        return materialPageBuilder(const SplashScreen());
+
       case Routes.otpScreen:
         return materialPageBuilder(const OtpScreen());
       case Routes.intialProfileSubmitScreen:
-        return materialPageBuilder(const InitialProfileSubmitScreen());
+        if (argument is String) {
+          return materialPageBuilder(InitialProfileSubmitScreen(
+            phoneNumber: argument,
+          ));
+        } else {
+          return materialPageBuilder(const ErrorPage());
+        }
+
       case Routes.homeScreen:
-        return materialPageBuilder(const HomeScreen());
-        //contact user page
+        if (argument is String) {
+          return materialPageBuilder(HomeScreen(uid: argument));
+        } else {
+          return materialPageBuilder(const ErrorPage());
+        }
+
+      //contact user page
       case Routes.contactsScreen:
-         return materialPageBuilder(const ContactsScreen());
+        return materialPageBuilder(const ContactsScreen());
       case Routes.settingsScreen:
-         return materialPageBuilder(const SettingsScreen());
+        if (argument is String) {
+          return materialPageBuilder(SettingsScreen(
+            uid: argument,
+          ));
+        } else {
+          return materialPageBuilder(const ErrorPage());
+        }
       case Routes.myStatusScreen:
-         return materialPageBuilder(const MyStatusScreen());
+        return materialPageBuilder(const MyStatusScreen());
       case Routes.callContactScreen:
-         return materialPageBuilder(const CallContactScreen());
+        return materialPageBuilder(const CallContactScreen());
       case Routes.singleChatScreen:
-         return materialPageBuilder(const SingleChatScreen());
+        return materialPageBuilder(const SingleChatScreen());
+      case Routes.editProfileScreen:
+        if (argument is UserEntity) {
+          return materialPageBuilder( EditProfileSreen(currentUser:argument));
+        } else {
+          return materialPageBuilder(const ErrorPage());
+        }
+
       default:
-        return MaterialPageRoute(
-            builder: (context) => Scaffold(
-                  body: Center(
-                    child: Text("N routes defined for ${settings.name}"),
-                  ),
-                ));
+        return materialPageBuilder(const ErrorPage());
     }
   }
 }
 
 dynamic materialPageBuilder(Widget child) {
   return MaterialPageRoute(builder: (context) => child);
+}
+
+class ErrorPage extends StatelessWidget {
+  const ErrorPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Error"),
+      ),
+      body: const Center(
+        child: Text("Error"),
+      ),
+    );
+  }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pin_code_fields/flutter_pin_code_fields.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:whatsapp_clone/features/app/helpers/extensions.dart';
 import 'package:whatsapp_clone/features/app/routing/routes.dart';
 import 'package:whatsapp_clone/features/app/theme/style.dart';
 import 'package:whatsapp_clone/features/user/presentation/widgets/btn_widget.dart';
+
+import '../cubit/credential/credential_cubit.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -59,10 +62,7 @@ class _OtpScreenState extends State<OtpScreen> {
             ])),
             btnWidget(
               textButton: "Next",
-              onTap: () {
-                print(_otpController.text);
-                context.pushReplacementNamed(Routes.intialProfileSubmitScreen);
-              },
+              onTap:  _submitSmsCode,
               width: 120.w,
               height: 40.h,
             )
@@ -85,5 +85,12 @@ class _OtpScreenState extends State<OtpScreen> {
         ],
       ),
     );
+  }
+  void _submitSmsCode(){
+    print("otpCode ${_otpController.text}");
+    if (_otpController.text.isNotEmpty){
+      BlocProvider.of<CredentialCubit>(context)
+          .submitSmsCode(smsCode: _otpController.text);
+    }
   }
 }
