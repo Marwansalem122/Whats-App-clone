@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'package:whatsapp_clone/bloc_providers.dart';
 import 'package:whatsapp_clone/features/app/routing/app_router.dart';
 import 'package:whatsapp_clone/features/app/routing/routes.dart';
 import 'package:whatsapp_clone/features/app/theme/style.dart';
+import 'features/user/data/data_sources/remote/user_remote_data_source_impl.dart';
 import 'main_injection_container.dart'as di;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -13,7 +15,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+ 
   await di.init();
+
   runApp(const MyApp());
 }
 

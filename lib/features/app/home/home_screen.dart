@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen>
           switchFloatingActionButtonOnTabIndex(_currentTabIndex),
       body: TabBarView(
           controller: _tabController,
-          children: const [ChatScreen(), StatusScreen(), CallsHistoryScreen()]),
+          children:  [ChatScreen(uid: widget.uid,), const StatusScreen(), const CallsHistoryScreen()]),
     );
   }
 
@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen>
           backgroundColor: tabColor,
           onPressed: () {
             // Navigator.pushNamed(context, PageConst.contactUsersPage, arguments: widget.uid);
-            context.pushNamed(Routes.contactsScreen);
+            context.pushNamed(Routes.contactsScreen,arguments: widget.uid);
           },
           child: const Icon(
             Icons.message,
@@ -165,6 +165,7 @@ class _HomeScreenState extends State<HomeScreen>
           onPressed: () {
             // Navigator.push(context, MaterialPageRoute(builder: (context) => const ContactsPage()));
             // Navigator.pushNamed(context, PageConst.contactUsersPage, arguments: widget.uid);
+            // context.pushNamed(Routes.contactsScreen,arguments: widget.uid.toString());
           },
           child: const Icon(
             Icons.message,

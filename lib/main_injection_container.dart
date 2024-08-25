@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:whatsapp_clone/features/user/user_injection_container.dart';
 
+import 'features/chat/presentation/chat_injection_container.dart';
+
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -15,5 +17,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => fireStore);
 
   await userInjectionContainer();
+  await chatInjectionContainer();
+  // await statusInjectionContainer();
+  // await callInjectionContainer();
 
 }

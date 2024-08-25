@@ -56,9 +56,9 @@ class _OtpScreenState extends State<OtpScreen> {
                 height: 30.h,
               ),
               _pinCodeWidget(),
-              SizedBox(
-                height: 30.h,
-              ),
+              // SizedBox(
+              //   height: 30.h,
+              // ),
             ])),
             btnWidget(
               textButton: "Next",
@@ -79,7 +79,9 @@ class _OtpScreenState extends State<OtpScreen> {
             controller: _otpController,
             length: 6,
             activeBorderColor: tabColor,
-            onComplete: (String pinCode) {},
+            onComplete: (String pinCode) {
+              FocusScope.of(context).unfocus();
+            },
           ),
           const Text("Enter your 6 digit code")
         ],

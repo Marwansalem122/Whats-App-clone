@@ -14,6 +14,7 @@ Future<void> getAllUsers() async {
     emit(UserLoading());
     final streamResponse = getAllUsersUseCase.call();
     streamResponse.listen((users) {
+      print("Users: ${users}");
       emit(UserLoaded(users: users));
     });
   }

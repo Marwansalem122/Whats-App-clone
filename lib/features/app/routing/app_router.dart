@@ -60,7 +60,12 @@ class AppRouter {
 
       //contact user page
       case Routes.contactsScreen:
-        return materialPageBuilder(const ContactsScreen());
+        if (argument is String) {
+          return materialPageBuilder( ContactsScreen(uid: argument,));
+        } else {
+          return materialPageBuilder(const ErrorPage());
+        }
+
       case Routes.settingsScreen:
         if (argument is String) {
           return materialPageBuilder(SettingsScreen(
