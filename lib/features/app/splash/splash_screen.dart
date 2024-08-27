@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:whatsapp_clone/features/app/helpers/extensions.dart';
+import 'package:whatsapp_clone/features/app/routing/routes.dart';
 import 'package:whatsapp_clone/features/app/theme/style.dart';
 import 'package:whatsapp_clone/features/app/welcome/welcome_screen.dart';
+import 'package:whatsapp_clone/features/status/presentation/pages/status_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,13 +19,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Timer(const Duration(seconds: 2), () {
       if (mounted) {
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (_) => const WelcomeScreen(),
-          ),
-          (route) => false,
-        );
+        context.pushNamedAndRemoveUntil(Routes.welcomeScreen);
+        // Navigator.pushAndRemoveUntil(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (_) => const WelcomeScreen(),
+        //   ),
+        //   (route) => false,
+        // );
       }
     });
     super.initState();

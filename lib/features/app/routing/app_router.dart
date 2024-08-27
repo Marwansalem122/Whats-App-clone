@@ -15,6 +15,7 @@ import 'package:whatsapp_clone/features/user/presentation/pages/initial_profile_
 import 'package:whatsapp_clone/features/user/presentation/pages/login_screen.dart';
 import 'package:whatsapp_clone/features/user/presentation/pages/otp_screen.dart';
 
+import '../../chat/domain/entities/message_entity.dart';
 import '../../user/presentation/cubit/auth/auth_cubit.dart';
 
 class AppRouter {
@@ -79,7 +80,12 @@ class AppRouter {
       case Routes.callContactScreen:
         return materialPageBuilder(const CallContactScreen());
       case Routes.singleChatScreen:
-        return materialPageBuilder(const SingleChatScreen());
+        if (argument is MessageEntity) {
+          return materialPageBuilder( SingleChatScreen(message: argument,));
+        } else {
+          return materialPageBuilder(const ErrorPage());
+        }
+
       case Routes.editProfileScreen:
         if (argument is UserEntity) {
           return materialPageBuilder( EditProfileSreen(currentUser:argument));

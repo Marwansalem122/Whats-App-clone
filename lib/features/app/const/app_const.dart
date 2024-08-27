@@ -24,7 +24,11 @@ Future<GiphyGif?> pickGIF(BuildContext context) async {
   try {
     gif = await GiphyPicker.pickGif(
         context: context,
-        apiKey: 'kLu4PIKAwS2ys47Ji7oWUIr2iZbEoj1k');
+        fullScreenDialog: false,
+        showPreviewPage:false, // مش هتخليك تفتح الشكل المتحرك في صفحة لوحده
+        apiKey:"AppOY52uutS3IReGLzQx0zlV8jh7g02g");
+        // 'kLu4PIKAwS2ys47Ji7oWUIr2iZbEoj1k';
+
 
   } catch (e) {
     toast(e.toString());

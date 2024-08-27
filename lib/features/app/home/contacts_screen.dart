@@ -58,16 +58,16 @@ class _ContactsScreenState extends State<ContactsScreen> {
 
                     return ListTile(
                       onTap: () {
-                        // context.pushNamed( Routes.singleChatScreen,
-                        //     arguments: MessageEntity(
-                        //         senderUid: currentUser.uid,
-                        //         recipientUid: contact.uid,
-                        //         senderName: currentUser.username,
-                        //         recipientName: contact.username,
-                        //         senderProfile: currentUser.profileUrl,
-                        //         recipientProfile: contact.profileUrl,
-                        //         uid: widget.uid
-                        //     ));
+                        context.pushNamed( Routes.singleChatScreen,
+                            arguments: MessageEntity(
+                                senderUid: currentUser.uid,
+                                recipientUid: contact.uid,
+                                senderName: currentUser.username,
+                                recipientName: contact.username,
+                                senderProfile: currentUser.profileUrl,
+                                recipientProfile: contact.profileUrl,
+                                uid: widget.uid
+                            ));
                       },
                       leading: SizedBox(
                         width: 50.w,

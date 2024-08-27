@@ -44,16 +44,16 @@ class _ChatScreenState extends State<ChatScreen> {
                 final chat = myChat[index];
                 return GestureDetector(
                   onTap: () {
-                    // Navigator.pushNamed(context, PageConst.singleChatPage,
-                    //     arguments: MessageEntity(
-                    //         senderUid: chat.senderUid,
-                    //         recipientUid:chat.recipientUid,
-                    //         senderName: chat.senderName,
-                    //         recipientName: chat.recipientName,
-                    //         senderProfile: chat.senderProfile,
-                    //         recipientProfile: chat.recipientProfile,
-                    //         uid: widget.uid
-                    //     ));
+                    context.pushNamed( Routes.singleChatScreen,
+                        arguments: MessageEntity(
+                            senderUid: chat.senderUid,
+                            recipientUid:chat.recipientUid,
+                            senderName: chat.senderName,
+                            recipientName: chat.recipientName,
+                            senderProfile: chat.senderProfile,
+                            recipientProfile: chat.recipientProfile,
+                            uid: widget.uid
+                        ));
                   },
                   child: ListTile(
                     leading: SizedBox(
@@ -61,7 +61,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       height: 50,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(25),
-                        child: profileWidget(),
+                        child: profileWidget(imageUrl: chat.recipientProfile),
                       ),
                     ),
                     title: Text("${chat.recipientName}"),

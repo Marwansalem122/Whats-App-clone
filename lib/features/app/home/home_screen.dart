@@ -47,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen>
                 fontWeight: FontWeight.w600,
                 fontSize: 20.sp,
                 color: greyColor)),
+        automaticallyImplyLeading: false,
         actions: [
           Row(
             children: [
