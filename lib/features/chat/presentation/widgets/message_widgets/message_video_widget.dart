@@ -7,9 +7,9 @@ import 'package:whatsapp_clone/features/app/home/contacts_screen.dart';
 class CachedVideoMessageWidget extends StatefulWidget {
   final String url;
   const CachedVideoMessageWidget({
-    Key? key,
+    super.key,
     required this.url,
-  }) : super(key: key);
+  });
 
   @override
   State<CachedVideoMessageWidget> createState() => _CachedVideoMessageWidgetState();

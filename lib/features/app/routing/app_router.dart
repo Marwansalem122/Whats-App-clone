@@ -16,6 +16,7 @@ import 'package:whatsapp_clone/features/user/presentation/pages/login_screen.dar
 import 'package:whatsapp_clone/features/user/presentation/pages/otp_screen.dart';
 
 import '../../chat/domain/entities/message_entity.dart';
+import '../../status/domain/entities/status_entity.dart';
 import '../../user/presentation/cubit/auth/auth_cubit.dart';
 
 class AppRouter {
@@ -76,7 +77,12 @@ class AppRouter {
           return materialPageBuilder(const ErrorPage());
         }
       case Routes.myStatusScreen:
-        return materialPageBuilder(const MyStatusScreen());
+        if (argument is StatusEntity) {
+          return materialPageBuilder( MyStatusScreen(status: argument,));
+        } else {
+          return materialPageBuilder(const ErrorPage());
+        }
+
       case Routes.callContactScreen:
         return materialPageBuilder(const CallContactScreen());
       case Routes.singleChatScreen:

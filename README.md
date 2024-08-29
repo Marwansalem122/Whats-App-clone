@@ -13,3 +13,8 @@ This is an app that mimics the Whatsapp app
 ![initialProfileSubmitScreen](MuMu12-20240818-111510.png)
 ![settinsScreen](Screenshot_٢٠٢٤٠٨٢٤-١٣٤٦٠٦.png)
 ![profileScreen](Screenshot_٢٠٢٤٠٨٢٤-١٣٤٧١١.png)
+![singleChatScreen](WhatsApp Image 2024-08-29 at 20.57.18_b839235f.jpg)
+![chatScreen](WhatsApp Image 2024-08-29 at 20.57.18_be0aac12.jpg)
+![statusScreenWithoutadding](Screenshot_٢٠٢٤٠٨٢٩-١٩٥١٥٢.png)
+![statusScreenWithadding](Screenshot_٢٠٢٤٠٨٢٩-١٩٥٢٢٢.png)
+

@@ -204,16 +204,19 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                 ],
               ),
               Positioned(
-                top: 30.h,
+                top: 25.h,
                 left: 50.w,
-                child: Text(
-                  widget.message.isSeen.toString() == null ? " " : "Online",
-                  style: TextStyle(
-                      fontSize: 9.sp,
-                      color: widget.message.isSeen.toString() == null
-                          ? greyColor
-                          : tabColor,
-                      fontWeight: FontWeight.w400),
+                child:  BlocBuilder<GetSingleUserCubit, GetSingleUserState>(
+                    builder: (context, state) {
+                      if(state is GetSingleUserLoaded) {
+                        return state.singleUser.isOnline == true ?  Text(
+                          "Online",
+                          style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.w400),
+                        ) : Container();
+                      }
+
+                      return Container();
+                    }
                 ),
               ),
             ],
@@ -274,6 +277,15 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                         itemCount: messages.length,
                         itemBuilder: (BuildContext context, int index) {
                           final message = messages[index];
+
+                          if(message.isSeen == false  && message.recipientUid == widget.message.uid) {
+                            provider.seenMessage(message: MessageEntity(
+                                senderUid: widget.message.senderUid,
+                                recipientUid: widget.message.recipientUid,
+                                messageId: message.messageId
+                            ));
+                          }
+
                           if (message.senderUid == widget.message.senderUid) {
                             return _messageLayout(
                               messageType: message.messageType,
@@ -284,7 +296,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                               isShowTick: true,
                               messageBgColor: messageColor,
                               rightPadding:
-                                  message.repliedMessage == "" ? 85 : 5,
+                                  message.repliedMessage == "" ? 85.w : 5.w,
                               reply: MessageReplayEntity(
                                   message: message.repliedMessage,
                                   messageType: message.repliedMessageType,
@@ -326,7 +338,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                               isShowTick: false,
                               messageBgColor: senderMessageColor,
                               rightPadding:
-                                  message.repliedMessage == "" ? 85 : 5,
+                                  message.repliedMessage == "" ? 85.w : 5.w,
                               reply: MessageReplayEntity(
                                   message: message.repliedMessage,
                                   messageType: message.repliedMessageType,
@@ -375,7 +387,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: Container(
+                                    child: SizedBox(
                                       height: 95.h,
                                       child: MessageReplayPreviewWidget(
                                         onCancelReplayListener: () {
