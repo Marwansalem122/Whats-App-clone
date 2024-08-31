@@ -15,6 +15,8 @@ import 'package:whatsapp_clone/features/user/presentation/pages/initial_profile_
 import 'package:whatsapp_clone/features/user/presentation/pages/login_screen.dart';
 import 'package:whatsapp_clone/features/user/presentation/pages/otp_screen.dart';
 
+import '../../call/domain/entities/call_entity.dart';
+import '../../call/presentation/pages/call_screen.dart';
 import '../../chat/domain/entities/message_entity.dart';
 import '../../status/domain/entities/status_entity.dart';
 import '../../user/presentation/cubit/auth/auth_cubit.dart';
@@ -98,7 +100,12 @@ class AppRouter {
         } else {
           return materialPageBuilder(const ErrorPage());
         }
-
+      case Routes.callScreen:
+        if (argument is CallEntity ) {
+          return materialPageBuilder( CallScreen(callEntity:argument));
+        } else {
+          return materialPageBuilder(const ErrorPage());
+        }
       default:
         return materialPageBuilder(const ErrorPage());
     }

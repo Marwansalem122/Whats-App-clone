@@ -1,5 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/call/presentation/cubits/agora/agora_cubit.dart';
+import 'features/call/presentation/cubits/call/call_cubit.dart';
+import 'features/call/presentation/cubits/my_call_history/my_call_history_cubit.dart';
 import 'features/chat/presentation/cubit/chat/chat_cubit.dart';
 import 'features/chat/presentation/cubit/message/message_cubit.dart';
 import 'features/status/presentation/cubit/get_my_status/get_my_status_cubit.dart';
@@ -39,14 +42,14 @@ class AppBlocProviders {
     BlocProvider(
       create: (context) => di.sl<GetMyStatusCubit>(),
     ),
-    // BlocProvider(
-    //   create: (context) => di.sl<CallCubit>(),
-    // ),
-    // BlocProvider(
-    //   create: (context) => di.sl<MyCallHistoryCubit>(),
-    // ),
-    // BlocProvider(
-    //   create: (context) => di.sl<AgoraCubit>(),
-    // ),
+    BlocProvider(
+      create: (context) => di.sl<CallCubit>(),
+    ),
+    BlocProvider(
+      create: (context) => di.sl<MyCallHistoryCubit>(),
+    ),
+    BlocProvider(
+      create: (context) => di.sl<AgoraCubit>(),
+    ),
   ];
 }

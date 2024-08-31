@@ -12,5 +12,6 @@ class Routes {
   static const String callContactScreen = "/callContactScreen";
   static const String singleChatScreen = "/singleChatScreen";
   static const String editProfileScreen = "/editProfileScreen";
+  static const String callScreen = "/callScreen";
 
 }

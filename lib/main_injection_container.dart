@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:whatsapp_clone/features/user/user_injection_container.dart';
 
+import 'features/call/call_injection_container.dart';
 import 'features/chat/presentation/chat_injection_container.dart';
 import 'features/status/status_injection_container.dart';
 
@@ -20,6 +21,6 @@ Future<void> init() async {
   await userInjectionContainer();
   await chatInjectionContainer();
   await statusInjectionContainer();
-  // await callInjectionContainer();
+  await callInjectionContainer();
 
 }
